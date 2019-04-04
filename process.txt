@@ -1,0 +1,11 @@
+1. open website in web driver
+2. click captcha button
+3. collect broken up image button elements
+4. download image
+5. get image label to search for
+6. break image up into parts
+7. check each image part to see if it matches word
+8. use matching image indexes to click image section buttons
+7. download new image that appears at that index and repeat 7 & 8
+8. once none of the images match the label, press button
+9. repeat 4-8 for every captcha question
