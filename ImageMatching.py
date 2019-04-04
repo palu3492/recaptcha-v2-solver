@@ -6,21 +6,6 @@ from google.cloud.vision import types
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "Test-0442790e64ab.json"
 
-def detect_labels(path, num):
-    client = vision.ImageAnnotatorClient()
-
-    with io.open(path, 'rb') as image_file:
-        content = image_file.read()
-
-    image = types.Image(content=content)
-
-    response = client.label_detection(image=image)
-    labels = response.label_annotations
-
-    #all = ""
-    for label in labels:
-        print (label.description)
-
 
 def break_up_image(path):
     img = Image.open(path)

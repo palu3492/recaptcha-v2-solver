@@ -103,4 +103,5 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+# GOOGLE_APPLICATION_CREDENTIALS
 *recaptcha-c192317be526.json

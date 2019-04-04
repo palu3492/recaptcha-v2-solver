@@ -5,7 +5,7 @@ driver.get('https://www.google.com/recaptcha/api2/demo')
 
 captcha_iframe = driver.find_element_by_css_selector("iframe[src^='https://www.google.com/recaptcha/api2/']")
 
-# swtich to captcha iframe
+# switch to captcha iframe
 driver.switch_to.frame(captcha_iframe)
 
 # this is specific to a recaptcha iframe

@@ -17,6 +17,8 @@ check_box = driver.find_element_by_class_name('recaptcha-checkbox-checkmark')
 #opens image selection menu
 check_box.click()
 
+driver.switch_to.default_content()
+
 # wait until image selection menu is open
 wait = WebDriverWait(driver, 10)
 wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "iframe[title='recaptcha challenge']")))
