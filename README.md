@@ -1,2 +1,2 @@
 # reCAPTCHA-v2-Solver
-Python bot that solves reCAPTCHA on web pages
+Automates Chrome to solve reCAPTCHA v2 image classification challenges to falsely validate as a 'human'
