@@ -5,7 +5,7 @@ from google.cloud.vision import types
 
 class ImageLabeling:
     def __init__(self):
-        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "recaptcha-c192317be526.json"
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "files/recaptcha-c192317be526.json"
 
     def detect_labels(self, image_path):
         client = vision.ImageAnnotatorClient()
