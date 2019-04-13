@@ -1,6 +1,6 @@
 import urllib.request
 
-class RecaptchaTest():
+class RecaptchaChallenge():
 
     def __init__(self, web_driver, tiles, rows, cols, separate_image, image_labeling):
         self.web_driver = web_driver

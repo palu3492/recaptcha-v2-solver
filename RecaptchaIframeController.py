@@ -1,11 +1,12 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from RecaptchaTest import *
+from RecaptchaChallenge import *
 from SeparateImage import *
 from ImageLabeling import *
+import time
 
-class ControlRecaptchaIframe:
+class RecaptchaIframeController:
 
     def __init__(self, web_driver):
         self.web_driver = web_driver
@@ -27,30 +28,26 @@ class ControlRecaptchaIframe:
         except:
             return False
 
-    # def find_skip_button(self):
-    #     pass
-    #
-    # def find_next_button(self):
-    #     pass
-
     def get_image_selection_tiles(self):
-        self.number_of_tiles = (self.web_driver.find_elements_by_css_selector("td[class='rc-imageselect-tile']"))
-        self.number_of_rows = len(self.web_driver.find_elements_by_css_selector("#rc-imageselect-target tr"))
-        self.number_of_columns = int(len(self.web_driver.find_elements_by_css_selector("td[class='rc-imageselect-tile']")) / rows)
+        time.sleep(5)
+        tiles = self.web_driver.find_element_by_id("rc-imageselect-target")
+        trs = tiles.find_elements_by_tag_name("tr")
+        self.number_of_rows = len(trs)
+        tds = tiles.find_elements_by_tag_name("td")
+        self.number_of_columns = len(tds)
+        self.number_of_tiles = self.number_of_rows * self.number_of_columns
 
     def start(self):
         if not self.find_recaptcha_iframe():
             print("Could not find reCAPTCHA image selection menu after clicking 'I'm not a robot' button")
             return
-        # self.find_skip_button()
-        # self.find_next_button()
         self.get_image_selection_tiles()
-        separate_image = SeparateImage()
+        separate_image = SeparateImage(self.number_of_rows, self.number_of_columns)
         image_labeling = ImageLabeling()
-        complete = False
-        while not complete:
-            new_test = RecaptchaTest(self.web_driver, self.number_of_tiles, self.number_of_rows, self.number_of_columns, separate_image, image_labeling)
-            complete = new_test.start_test()
-            self.verify_button.click()
-        self.web_driver.switch_to.default_content()
+        # complete = False
+        # while not complete:
+        #     new_test = RecaptchaChallenge(self.web_driver, self.number_of_tiles, self.number_of_rows, self.number_of_columns, separate_image, image_labeling)
+        #     complete = new_test.start_test()
+        #     self.verify_button.click()
+        # self.web_driver.switch_to.default_content()
 
