@@ -15,7 +15,7 @@ class SeparateImage():
         self.square_width = image_width/self.number_of_columns
         self.square_height = image_height/self.number_of_rows
 
-    def split_image(self, save_all, tile_index):
+    def separate(self, save_all, tile_index):
         index = 0
         for row in range(self.number_of_rows):
             for col in range(self.number_of_columns):

@@ -3,7 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from RecaptchaChallenge import *
 from SeparateImage import *
-from ImageLabeling import *
+from LabelImage import *
 import time
 
 class RecaptchaIframeController:
@@ -31,10 +31,10 @@ class RecaptchaIframeController:
     def get_image_selection_tiles(self):
         time.sleep(5)
         tiles = self.web_driver.find_element_by_id("rc-imageselect-target")
-        trs = tiles.find_elements_by_tag_name("tr")
-        self.number_of_rows = len(trs)
-        tds = tiles.find_elements_by_tag_name("td")
-        self.number_of_columns = len(tds)
+        rows = tiles.find_elements_by_tag_name("tr")
+        self.number_of_rows = len(rows)
+        cols = rows[0].find_elements_by_tag_name("td")
+        self.number_of_columns = len(cols)
         self.number_of_tiles = self.number_of_rows * self.number_of_columns
 
     def start(self):
@@ -43,11 +43,12 @@ class RecaptchaIframeController:
             return
         self.get_image_selection_tiles()
         separate_image = SeparateImage(self.number_of_rows, self.number_of_columns)
-        image_labeling = ImageLabeling()
+        image_labeling = LabelImage()
         # complete = False
         # while not complete:
-        #     new_test = RecaptchaChallenge(self.web_driver, self.number_of_tiles, self.number_of_rows, self.number_of_columns, separate_image, image_labeling)
-        #     complete = new_test.start_test()
-        #     self.verify_button.click()
+        challenge = RecaptchaChallenge(self.web_driver, self.number_of_tiles, self.number_of_rows, self.number_of_columns, separate_image, image_labeling)
+        challenge.complete_challenge()
+            # complete = new_test.start_test()
+            # self.verify_button.click()
         # self.web_driver.switch_to.default_content()
 
